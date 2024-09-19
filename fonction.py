@@ -25,27 +25,27 @@ règles du jeu :
 
 fonction pour pouvoir jouer :
 
-        - choisir un mot:
-            #input :
-            #output : un mot (str)
+        # - choisir un mot:
+        #     #input :
+        #     #output : un mot (str)
 
-            - lecture de fichier:
-                #input :
-                #output : liste de mot (list)
-            - choix du mot aléatoire:
-                #input : 
-                #output : mot (str)
+        #     - lecture de fichier:
+        #         #input :
+        #         #output : liste de mot (list)
+        #     - choix du mot aléatoire:
+        #         #input : 
+        #         #output : mot (str)
 
-        - fonction de verification saisie utilisateur:
+        # - fonction de verification saisie utilisateur:
             
 
-            - vérifie que la saisie est bien une str:
-                #input : saisie (str)
-                #output : bool
-            - vérifie qu'il n'y a pas de caractère spéciaux ni d'accent:
-                #input : saisie (str)
-                #output : validité (bool)
-            - mettre la saisie en majuscule
+        #     - vérifie que la saisie est bien une str:
+        #         #input : saisie (str)
+        #         #output : bool
+        #     - vérifie qu'il n'y a pas de caractère spéciaux ni d'accent:
+        #         #input : saisie (str)
+        #         #output : validité (bool)
+        #     - mettre la saisie en majuscule
 
         - fonction pour verifier la presence de la lettre dans le mot:
             #input : mot,lettre (str,str)
@@ -58,12 +58,17 @@ fonction pour pouvoir jouer :
             -creation d'une liste de la taille du mot
             -placement au indice donner
 """
-#importation des modules
+##################################################################
+#                   importation des modules                      #
+##################################################################
+
 from csv import reader
 from random import choice
 
 
-
+##################################################################
+#                   fonctions choix du mot                       #
+##################################################################
 
 
 def check_file(file_name: str) -> bool:
@@ -115,6 +120,29 @@ def select_word() -> str:
     word = choice(liste_word)
     return word
 
+##################################################################
+#                fonctions saisie utilisateur                    #
+##################################################################
+
+def check_saisie(saisie: str) -> bool:
+    """
+    fonction qui vérifie si la saisie est bien une chaîne de character\n
+    et si il n'y a pas de caractère spéciaux 
+
+    #input : saisie de l'utilisateur (str)
+    #output : syntaxe correct (bool)
+    """
+    if type(saisie) == str:
+        if len(saisie) == 1:
+            return saisie in "AZERTYUIOPQSDFGHJKLMWXCVBN"
+        else :
+            for lettre in saisie:
+                if lettre not in "AZERTYUIOPQSDFGHJKLMWXCVBN" :
+                    return False
+            return True
+    return False
+
+
 
 
 
@@ -142,3 +170,12 @@ if __name__ == "__main__":
     print("select_word -> aléatoire : ")
     for i in range(10):
         print(select_word())
+    
+    #fonction check_saisie
+
+    print("check_saisie -> saisie mot OK :",check_saisie("BONJOUR"))
+    print("check_saisie -> saisie lettre OK :",check_saisie("B"))
+    print("check_saisie -> saisie lettre special :",check_saisie("é"))
+    print("check_saisie -> mauvais type :",check_saisie(12))
+
+    
