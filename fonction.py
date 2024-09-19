@@ -154,14 +154,14 @@ if __name__ == "__main__":
 
     #fonction check_file
 
-    print("check_file -> existance OK : ", check_file("dictionnaire.txt"))
-    print("check_file -> existance NO : ", check_file("blabla.txt"))
+    print("check_file -> existence OK : ", check_file("dictionnaire.txt"))
+    print("check_file -> existence NO : ", check_file("blabla.txt"))
     print("check_file -> mauvais format : ", check_file(12))
 
     #fonction read_file
 
-    print("read_file -> existance OK : ", read_file("dictionnaire.txt"))
-    print("read_file -> existance NO : ", read_file("blabla.txt"))
+    print("read_file -> existence OK : ", read_file("dictionnaire.txt"))
+    print("read_file -> existence NO : ", read_file("blabla.txt"))
     print("read_file -> mauvais format : ", read_file(12))
 
     #fonction select_word
