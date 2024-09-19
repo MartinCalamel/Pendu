@@ -24,7 +24,8 @@ règles du jeu :
 fonction pour pouvoir jouer :
 
 - choisir un mot:
-    # rien en entrer une string en sortie #
+    #input :
+    #output : un mot (str)
 
     - lecture de fichier:
         #input :
