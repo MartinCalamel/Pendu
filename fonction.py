@@ -47,13 +47,32 @@ fonction pour pouvoir jouer :
         #         #output : validité (bool)
         #     - mettre la saisie en majuscule
 
-        - fonction pour verifier la presence de la lettre dans le mot:
-            #input : mot,lettre (str,str)
-            #output : les position de la lettre [] si erreur (list)
+        # - fonction pour verifier la presence de la lettre dans le mot:
+        #     #input : mot,lettre (str,str)
+        #     #output : les position de la lettre [] si erreur (list)
 
         - fonction de remplacement de la lettre dans le mot:
-            #input : liste des lettre, indices, lettre (list,list,str)
+            #input : indices, mot (list,list,str)
             #output : liste mise a jour
+        
+        - fonction pour check si la lettre est bien dans le mot:
+            #input : liste des indices
+            #output : bool
+        
+        - fonction pour faire le jeu:
+            -tours:
+                - récupérer une saisie utilisateur
+                -vérifier si c'est une lettre ou un mot:
+                    -si c'est une lettre:
+                        - vérifier que la lettre est dans le mot:
+                            * ajouter la lettre
+                            * enlever une vie
+                        -test de gagne
+                    -si c'est un mot:
+                        - teste de gagne:
+                            * fin
+                            * enlever une vie
+                
 
             -creation d'une liste de la taille du mot
             -placement au indice donner
@@ -103,7 +122,7 @@ def read_file(file_name: str) -> list:
 
         file = open(file_name,"r")
         content = reader(file,delimiter=';')
-        data = [ligne[0] for ligne in content] # récupère le premier element de la ligne (seul)
+        data = [ ligne[0] for ligne in content ] # récupère le premier element de la ligne (seul)
         file.close()
 
         return data
@@ -142,6 +161,19 @@ def check_saisie(saisie: str) -> bool:
             return True
     return False
 
+##################################################################
+#                fonctions propre au pendu                       #
+##################################################################
+
+def lettre_in_word(lettre: str, word: str) -> list:
+    """
+    fonction qui cherche si le lettre donnée est dans le mot mystère
+
+    #input : lettre (str), mot mystère (str)
+    #output : liste des indice ou apparaît la lettre dans le mot (list)
+    """
+    indices=[ i for i in range(len(word)) if lettre == word[i] ]
+    return indices
 
 
 
@@ -157,12 +189,14 @@ if __name__ == "__main__":
     print("check_file -> existence OK : ", check_file("dictionnaire.txt"))
     print("check_file -> existence NO : ", check_file("blabla.txt"))
     print("check_file -> mauvais format : ", check_file(12))
+    print("\n\n")
 
     #fonction read_file
 
     print("read_file -> existence OK : ", read_file("dictionnaire.txt"))
     print("read_file -> existence NO : ", read_file("blabla.txt"))
     print("read_file -> mauvais format : ", read_file(12))
+    print("\n\n")
 
     #fonction select_word
 
@@ -170,6 +204,7 @@ if __name__ == "__main__":
     print("select_word -> aléatoire : ")
     for i in range(10):
         print(select_word())
+    print("\n\n")
     
     #fonction check_saisie
 
@@ -177,5 +212,10 @@ if __name__ == "__main__":
     print("check_saisie -> saisie lettre OK :",check_saisie("B"))
     print("check_saisie -> saisie lettre special :",check_saisie("é"))
     print("check_saisie -> mauvais type :",check_saisie(12))
+    print("\n\n")
 
+    #fonction lettre_in_word
+    print("lettre_in_word -> 2 E dans ELEPHANT au indices 0 et 2 :",lettre_in_word("E","ELEPHANT"))
+    print("lettre_in_word -> 0 Z dans ELEPHANT :",lettre_in_word("Z","ELEPHANT"))
+    print("\n\n")
     
