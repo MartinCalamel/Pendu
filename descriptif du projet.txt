@@ -1,0 +1,56 @@
+Descriptif du projet
+
+but :
+Faire un jeu de pendu
+
+règles du jeu :
+    - le joueur doit trouver un mot en essayant de trouver les lettres qui le compose
+    - déroulement d'une manche : 
+        - le joueur connais la longueur du mot et en fonction de la difficulté:
+            - la première lettre et la dernière
+            - la première lettre
+            - rien d'autre
+        - la partie est finie quand le joueur devine le mot ou quand le pendu est completer
+    - déroulement d'un tour : 
+        - le joueur propose une lettre ou un mot:
+            - si la proposition est un mot :
+                - on vérifie qu'il est juste et on fait soit gagner soit on ajoute une etape au pendu
+            - si c'est une lettre :
+                - on vérifie que la lettre est dans le mot:
+                    - si oui on la place autant de fois qu'elle est dans le mot
+                    - sinon on ajoute une etape au pendu
+                - si la lettre a deja ete jouer on le dit au joueur
+
+fonction pour pouvoir jouer :
+
+- choisir un mot:
+    # rien en entrer une string en sortie #
+
+    - lecture de fichier:
+        #input :
+        #output : liste de mot (list)
+    - choix du mot aléatoire:
+        #input : 
+        #output : mot (str)
+
+- fonction de verification saisie utilisateur:
+    
+
+    - vérifie que la saisie est bien une str:
+        #input : saisie (str)
+        #output : bool
+    - vérifie qu'il n'y a pas de caractère spéciaux ni d'accent:
+        #input : saisie (str)
+        #output : validité (bool)
+    - mettre la saisie en majuscule
+
+- fonction pour verifier la presence de la lettre dans le mot:
+    #input : mot,lettre (str,str)
+    #output : les position de la lettre [] si erreur (list)
+
+- fonction de remplacement de la lettre dans le mot:
+    #input : liste des lettre, indices, lettre (list,list,str)
+    #output : liste mise a jour
+
+    -creation d'une liste de la taille du mot
+    -placement au indice donner
