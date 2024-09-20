@@ -127,7 +127,7 @@ def read_file(file_name: str) -> list:
 
         return data
 
-def select_word() -> str:
+def select_mystery() -> str:
     """
     prend le mot aléatoire pour le jeu du pendu dans un fichier (ici dictionnaire.txt) et le renvoie
 
@@ -135,9 +135,9 @@ def select_word() -> str:
     #output : mot aléatoire (str)
     """
 
-    liste_word = read_file("dictionnaire.txt")
-    word = choice(liste_word)
-    return word
+    liste_mystery = read_file("dictionnaire.txt")
+    mystery = choice(liste_mystery)
+    return mystery
 
 ##################################################################
 #                fonctions saisie utilisateur                    #
@@ -162,18 +162,27 @@ def check_saisie(saisie: str) -> bool:
     return False
 
 ##################################################################
-#                fonctions propre au pendu                       #
+#                fonctions propres au pendu                       #
 ##################################################################
 
-def lettre_in_word(lettre: str, word: str) -> list:
+def lettre_in_mystery(lettre: str, mystery: str) -> list:
     """
     fonction qui cherche si le lettre donnée est dans le mot mystère
 
     #input : lettre (str), mot mystère (str)
     #output : liste des indice ou apparaît la lettre dans le mot (list)
     """
-    indices=[ i for i in range(len(word)) if lettre == word[i] ]
+    indices=[ i for i in range(len(mystery)) if lettre == mystery[i] ]
     return indices
+
+def put_lettre_word(lettre: str, indice: list, word: str):
+    """
+    fonction de remplacement de la lettre dans le mot
+
+    #input : indices, mot (list,list,str)
+    #output : liste mise a jour
+    """
+    pass
 
 
 
@@ -200,10 +209,10 @@ if __name__ == "__main__":
 
     #fonction select_word
 
-    print("select word -> word : ", select_word())
+    print("select word -> word : ", select_mystery())
     print("select_word -> aléatoire : ")
     for i in range(10):
-        print(select_word())
+        print(select_mystery())
     print("\n\n")
     
     #fonction check_saisie
@@ -215,7 +224,7 @@ if __name__ == "__main__":
     print("\n\n")
 
     #fonction lettre_in_word
-    print("lettre_in_word -> 2 E dans ELEPHANT au indices 0 et 2 :",lettre_in_word("E","ELEPHANT"))
-    print("lettre_in_word -> 0 Z dans ELEPHANT :",lettre_in_word("Z","ELEPHANT"))
+    print("lettre_in_word -> 2 E dans ELEPHANT au indices 0 et 2 :",lettre_in_mystery("E","ELEPHANT"))
+    print("lettre_in_word -> 0 Z dans ELEPHANT :",lettre_in_mystery("Z","ELEPHANT"))
     print("\n\n")
     
