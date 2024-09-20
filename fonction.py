@@ -121,8 +121,8 @@ def read_file(file_name: str) -> list:
     if check_file(file_name):
 
         file = open(file_name,"r")
-        content = reader(file,delimiter=';')
-        data = [ ligne[0] for ligne in content ] # récupère le premier element de la ligne (seul)
+        content = file.read()
+        data = content.split(";") # récupère le premier element de la ligne (seul)
         file.close()
 
         return data
