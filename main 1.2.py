@@ -12,6 +12,7 @@ from os import system
 
 system("cls")
 jouer = True
+meilleur_score = 0
 
 while jouer:
     mot_mystere = select_mystery()
@@ -19,26 +20,31 @@ while jouer:
     perdu = False
     vie = 8
     mot_en_cours = mot_mystere[0]+"_"*(len(mot_mystere)-1)
-    lettres_teste=[]
-
+    lettres_teste = []
     while not gagne and not perdu:
-        print(mot_en_cours, '\nVies : ', vie, "/8")
-        print(lettres_teste,"\n")
+        print(mot_en_cours, '\n\nVies : ', vie, "/8")
+        print("\n",lettres_teste,"\n")
         saisie = input("lettre ou mot en majuscule pour le pendu \n>>> ")
         if saisie in lettres_teste:
             print("lettre déjà tester")
+        
         else:
             lettres_teste.append(saisie)
             mot_en_cours, vie, gagne, perdu, saisie, = tour(saisie, mot_mystere, mot_en_cours, vie)
             if not saisie:
                 print("veilliez à respecter les consignes de saisie")
-            system("cls")
+        system("cls")
     
     if gagne:
+        print(mot_en_cours)
         print("Bravo vous avez gagné !!!")
+        print("score = ", vie)
+        if vie > meilleur_score:
+            meilleur_score = vie
+            print("nouveau meilleur score !!!")
     
     else:
         print("Vous avez perdu...")
-
-    jouer= input("vouler vous continuer a jouer (Y/N) : ") == "Y"
+        print("le mot était : ", mot_mystere)
+    jouer= input("voulez vous continuer a jouer (Y/N) : ") == "Y"
         
