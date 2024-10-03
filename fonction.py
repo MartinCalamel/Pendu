@@ -193,8 +193,10 @@ def put_lettre_word(lettre: str, indice: list, word: str) -> str:
     #input : lettre, indices, mot (str,list,str)
     #output : mot mise a jour (str)
     """
+    word=list(word)
     for i in indice:
         word[i]=lettre
+    word="".join(word)
     return word
 
 def check_lettre_in_word(indice: list) -> bool:
@@ -242,6 +244,7 @@ def tour(saisie: str, mystery: str, word: str, life: int):
 
                 if check_victory(word):
                     return[word, life, True, False, True]
+                return [word, life, False, False, True]
         
         else:
             if saisie == mystery:
@@ -301,4 +304,15 @@ if __name__ == "__main__":
     print("lettre_in_word -> 2 E dans ELEPHANT au indices 0 et 2 :",lettre_in_mystery("E","ELEPHANT"))
     print("lettre_in_word -> 0 Z dans ELEPHANT :",lettre_in_mystery("Z","ELEPHANT"))
     print("\n\n")
+
+    # fonction tour()
+    #input: saisie de l'utilisateur (str), mot mystère (str), mot en cours (str), point de vie (str)
+    #output: mot en cours (str), vie restante(int), victoire ?(bool), defaite ?(bool), saisie correct ? (bool)
+    print("tour -> [ME____E_, 8, False, False, True] : ", tour("E","MELANGER","M_______",8))
+    print("tour -> [M_______, 7, False, False, True] : ", tour("X","MELANGER","M_______",8))
+    print("tour -> [M_______, 7, False, False, True] : ", tour("PATATE","MELANGER","M_______",8))
+    print("tour -> [M_______, 8, False, False, False] : ", tour("7","MELANGER","M_______",8))
+    print("tour -> [M_______, 0, False, True, True] : ", tour("X","MELANGER","M_______",1))
+    print("tour -> [MELANGER, 8, True, False, True] : ", tour("E","MELANGER","M_LANG_R",8))
+    print('\n\n')
     
