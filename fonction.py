@@ -305,9 +305,22 @@ if __name__ == "__main__":
     print("lettre_in_word -> 0 Z dans ELEPHANT :",lettre_in_mystery("Z","ELEPHANT"))
     print("\n\n")
 
+    # fonction check_if_lettre()
+    print("check_if_lettre -> True : ", check_if_lettre("H"))
+    print("check_if_lettre -> False : ", check_if_lettre("HEY"))
+    print('\n\n')
+
+    #fonction check_lettre_in_word()
+    print("check_lettre_in_word -> True : ", check_lettre_in_word([1,3]))
+    print("check_lettre_in_word -> False : ", check_lettre_in_word([]))
+    print("\n\n")
+
+    # fonction check_victory()
+    print("check_victory -> True : ", check_victory("BONJOUR"))
+    print("check_victory -> False : ", check_victory("BO_JOUR"))
+    print("\n\n")
+
     # fonction tour()
-    #input: saisie de l'utilisateur (str), mot mystère (str), mot en cours (str), point de vie (str)
-    #output: mot en cours (str), vie restante(int), victoire ?(bool), defaite ?(bool), saisie correct ? (bool)
     print("tour -> [ME____E_, 8, False, False, True] : ", tour("E","MELANGER","M_______",8))
     print("tour -> [M_______, 7, False, False, True] : ", tour("X","MELANGER","M_______",8))
     print("tour -> [M_______, 7, False, False, True] : ", tour("PATATE","MELANGER","M_______",8))
