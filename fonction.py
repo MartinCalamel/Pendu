@@ -51,13 +51,13 @@ fonction pour pouvoir jouer :
         #     #input : mot,lettre (str,str)
         #     #output : les position de la lettre [] si erreur (list)
 
-        - fonction de remplacement de la lettre dans le mot:
-            #input : indices, mot (list,list,str)
-            #output : liste mise a jour
+        # - fonction de remplacement de la lettre dans le mot:
+        #     #input : indices, mot (list,list,str)
+        #     #output : liste mise a jour
         
-        - fonction pour check si la lettre est bien dans le mot:
-            #input : liste des indices
-            #output : bool
+        # - fonction pour check si la lettre est bien dans le mot:
+        #     #input : liste des indices
+        #     #output : bool
         
         - fonction pour faire le jeu:
             -tours:
@@ -152,7 +152,7 @@ def check_saisie(saisie: str) -> bool:
     #output : syntaxe correct (bool)
     """
     if type(saisie) == str:
-        if len(saisie) == 1:
+        if check_if_lettre(saisie):
             return saisie in "AZERTYUIOPQSDFGHJKLMWXCVBN"
         else :
             for lettre in saisie:
@@ -160,6 +160,17 @@ def check_saisie(saisie: str) -> bool:
                     return False
             return True
     return False
+
+def check_if_lettre(saisie: str) -> bool:
+    '''
+    fonction pour verrifier s'il sagit d'une lettre ou d'un mot
+
+    #input: saisie de l'utilisateur (str)
+    #output: true si c'est une lettre false sinon (str)
+    '''
+
+    return len(saisie)==1
+
 
 ##################################################################
 #                fonctions propres au pendu                       #
@@ -170,19 +181,82 @@ def lettre_in_mystery(lettre: str, mystery: str) -> list:
     fonction qui cherche si le lettre donnée est dans le mot mystère
 
     #input : lettre (str), mot mystère (str)
-    #output : liste des indice ou apparaît la lettre dans le mot (list)
+    #output : liste des indice ou apparaît la lettre dans le mot (list) retourne [] si pas d'indice
     """
     indices=[ i for i in range(len(mystery)) if lettre == mystery[i] ]
     return indices
 
-def put_lettre_word(lettre: str, indice: list, word: str):
+def put_lettre_word(lettre: str, indice: list, word: str) -> str:
     """
     fonction de remplacement de la lettre dans le mot
 
-    #input : indices, mot (list,list,str)
-    #output : liste mise a jour
+    #input : lettre, indices, mot (str,list,str)
+    #output : mot mise a jour (str)
     """
-    pass
+    for i in indice:
+        word[i]=lettre
+    return word
+
+def check_lettre_in_word(indice: list) -> bool:
+    '''
+    fonction pour check si la lettre est bien dans le mot:
+    
+    #input : liste des indices
+    #output : bool
+    '''
+    return len(indice)!=0
+
+def check_victory(word):
+    '''
+    fonction pour verifier si le mot est completer pour une victoire
+
+    #input: mot en cours (str)
+    #output: victoire ? (bool)
+    '''
+    return not "_" in word
+
+def tour(saisie: str, mystery: str, word: str, life: int):
+    '''
+    - fonction pour faire le jeu:
+            -tours:
+                - récupérer une saisie utilisateur
+                -vérifier si c'est une lettre ou un mot:
+                    -si c'est une lettre:
+                        - vérifier que la lettre est dans le mot:
+                            * ajouter la lettre
+                            * enlever une vie
+                        -test de gagne
+                    -si c'est un mot:
+                        - teste de gagne:
+                            * fin
+                            * enlever une vie
+    #input: saisie de l'utilisateur (str), mot mystère (str), mot en cours (str), point de vie (str)
+    #output: mot en cours (str), vie restante(int), victoire ?(bool), defaite ?(bool), saisie correct ? (bool)
+    '''
+    if check_saisie(saisie):
+        if check_if_lettre(saisie):
+            indices=lettre_in_mystery(saisie,mystery)
+
+            if check_lettre_in_word(indices):
+                word=put_lettre_word(saisie, indices, word)
+
+                if check_victory(word):
+                    return[word, life, True, False, True]
+        
+        else:
+            if saisie == mystery:
+                return [word, life, True, False, True]
+        
+        life-=1
+        if life == 0:
+            return [word, life, False, True, True]
+        
+        return [word, life, False, False, True]
+    
+    return [word, life, False, False, False]
+    
+
+
 
 
 
