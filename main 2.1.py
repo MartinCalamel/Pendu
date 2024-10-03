@@ -33,12 +33,27 @@ def error(saisie):
     if not saisie:
         tkinter.messagebox.showerror('erreur',"Veuillez vous conformer au règles de saisie")
 
+def reset():
+    global mot_mystere, mot_en_cours, gagne, perdu, vie, image_container
+    mot_mystere = select_mystery()
+    mot_en_cours = mot_mystere[0]+"_"*(len(mot_mystere)-1)
+    gagne = False
+    perdu = False
+    vie = 8
+    image_container = canvas.create_image(10,10,anchor=tkinter.NW,image=liste_image[0])
+    label_mot_courant.config(text= mot_en_cours)
+    label_vie_restante.config(text= "Vies restantes : " + str(vie))
+
 def states(gagne, perdu, saisie):
     victory(gagne)
     loose(perdu)
     error(saisie)
     if gagne or perdu:
-        fen.destroy()
+        res=tkinter.messagebox.askquestion('Exit Application', 'voulez vous jouer une nouvelle partie')
+        if res == "yes":
+            reset()
+        else :
+            fen.destroy()
 
 def switch_image(vie):
     canvas.itemconfig(image_container,image=liste_image[7-vie])
@@ -53,8 +68,6 @@ def play_tour(event=None):
     label_vie_restante.config(text= "Vies restantes : " + str(vie))
     switch_image(vie)
     states(gagne,perdu,saisie)
-
-def initialisation():
     
 
 # variable globales
