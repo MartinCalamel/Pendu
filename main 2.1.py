@@ -14,26 +14,65 @@ from PIL import Image,ImageTk
 # fonction
 
 def open_image(img_name: str):
+    '''
+    fonction pour ouvire une image en temps que variable utilisable par tkinter
+
+    #input: nom de l'image (str)
+    #output: image ouverte pour tkinter
+    '''
+
     image = ImageTk.PhotoImage(Image.open(img_name))
     return image
 
 def open_all_image(liste_name):
+    '''
+    fonction pour ouvrire toutes les images a partire d'une liste de nom
+
+    #input: liste des nom (list)
+    #output: liste d'image tkinter (list)
+    '''
+
     liste_image = [open_image(i) for i in liste_name]
     return liste_image
 
-def victory(gagne):
+def victory(gagne: bool) -> None:
+    '''
+    fonction pour afficher le message en cas de victoire
+
+    #input: est ce que victoire ? (bool)
+    #output: rien (None)
+    '''
+
     if gagne:
         tkinter.messagebox.showinfo('Victoire',"Vous avez gagné")
 
-def loose(perdu):
-    if perdu:
-        tkinter.messagebox.showwarning('Défaite',"Vous avez perdu")
+def loose(perdu: bool) -> None:
+    '''
+    fonction pour afficher le message en cas de défaite
 
-def error(saisie):
+    #input: est ce que défaite ? (bool)
+    #output: rien (None) 
+    '''
+    if perdu:
+        tkinter.messagebox.showwarning('Défaite',"Vous avez perdu\n le mot était "+str(mot_mystere))
+
+def error(saisie: bool) -> None:
+    '''
+    fonction pour afficher le message en cas d'erreur de saisie
+
+    #input: est ce que erreur ? (bool)
+    #output: rien (None)
+    '''
     if not saisie:
         tkinter.messagebox.showerror('erreur',"Veuillez vous conformer au règles de saisie")
 
 def reset():
+    '''
+    fonction pour recommencer une partie et remette les variable au condition initial
+
+    #input: rien
+    #output: rien
+    '''
     global mot_mystere, mot_en_cours, gagne, perdu, vie, image_container
     mot_mystere = select_mystery()
     mot_en_cours = mot_mystere[0]+"_"*(len(mot_mystere)-1)
@@ -45,6 +84,12 @@ def reset():
     label_vie_restante.config(text= "Vies restantes : " + str(vie))
 
 def states(gagne, perdu, saisie):
+    '''
+    fonction pour gérer les états en fin de tours
+
+    #input: états de gagne (bool), états de perte (bool), états de saisie (bool) 
+    #output: rien (None)
+    '''
     victory(gagne)
     loose(perdu)
     error(saisie)
